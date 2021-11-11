@@ -7,6 +7,7 @@ body {
   font-family: 'Montserrat', cursive;
   background-color: #1d2132;
 }
+/*GAMES STYLES*/
 /*Header*/
 .header {
   display: flex;
@@ -94,6 +95,15 @@ h3 {
   margin-right: 1rem;
   min-width: 8rem;
 }
+.nav-pills img {
+  height: 20px;
+  width: 40px;
+}
+.section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 /*Card Classes*/
 h2 {
   font-family: 'Montserrat', bold;
@@ -101,7 +111,8 @@ h2 {
 .games-section {
   position: relative;
 }
-.cards {
+.cards,
+.players {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -145,14 +156,32 @@ h2 {
 .card:hover .detail-btn {
   display: block;
 }
+.player:hover .detail-btn {
+  display: block;
+}
 .detail-btn:hover,
 .join-btn:hover {
   margin-bottom: 0.5rem;
 }
-.card:hover {
+.card:hover,
+.player:hover {
   background: linear-gradient(180deg, #1a1e2d, #1a1e2d);
   position: relative;
   z-index: 1;
+}
+.new-game-button {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 4px;
+  margin-bottom: 0.4375rem;
+  background: linear-gradient(90deg, #ff0000, #fffb00);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  text-decoration: none;
+  padding: 0.4375rem;
+  border-radius: 1rem;
+  flex-basis: 32%;
+  height: 20rem;
+  background-position: center;
 }
 /*Modal Details*/
 .modal {
@@ -209,30 +238,37 @@ h2 {
 .modal-map {
   flex-basis: 50%;
 }
+.modal-map img {
+  width: 100%;
+}
 .modal-body img {
   padding: 1rem;
-  width: 50%;
 }
 .modal-footer {
-  padding: 2px 16px;
+  display: block;
+  text-align: center;
+  padding: 1rem;
   background: linear-gradient(180deg, #1a1e2d, #1a1e2d);
   color: white;
 }
 .modal-header img {
   width: 100%;
 }
-.new-game-button {
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 4px;
-  margin-bottom: 0.4375rem;
-  background: linear-gradient(90deg, #ff0000, #fffb00);
-  overflow: hidden;
-  text-decoration: none;
-  padding: 0.4375rem;
-  border-radius: 1rem;
-  flex-basis: 32%;
-  height: 20rem;
+/*Edit Details Modal*/
+.edit-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  border-radius: 0.4375rem;
+  background: linear-gradient(180deg, #1a1e2d, #1a1e2d);
 }
-
 @-webkit-keyframes animatetop {
   from {
     top: -300px;
@@ -268,20 +304,28 @@ h2 {
   text-decoration: none;
   cursor: pointer;
 }
-
-.form {
-  position: absolute;
-  top: 3.125rem;
-  z-index: 999;
+/*PLAYERS STYLES*/
+.player {
+  justify-content: start;
+  width: auto;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 4px;
+  margin-bottom: 1.4375rem;
+  background: linear-gradient(90deg, #00e1ff, #fffb00);
+  overflow: hidden;
+  text-decoration: none;
+  padding: 0.4375rem;
+  border-radius: 1rem;
 }
-
 /*Margin's, padding's, common classes*/
 .d-flex {
   display: flex;
 }
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
 .btn {
   min-width: 6rem;
-  background: #e0e5f4;
   box-shadow: 7px 9px 11px rgb(29 33 50 / 25%);
   font-weight: 600;
   font-size: 0.6875rem;
@@ -296,7 +340,7 @@ h2 {
 }
 .btn:hover {
   margin-bottom: 0.5rem;
-  box-shadow: 0px 5px 8px 10px rgba(124, 60, 182, 0.2);
+  box-shadow: 0px 5px 8px 10px #ff9900;
 }
 .btn:active {
   outline: none;
@@ -326,7 +370,8 @@ h2 {
 }
 /*Media Queries*/
 @media (min-width: 1366px) {
-  .card {
+  .card,
+  .player {
     flex-basis: 32%;
   }
 }
@@ -334,7 +379,8 @@ h2 {
   .container {
     max-width: 992px;
   }
-  .card {
+  .card,
+  .player {
     flex-basis: 49%;
   }
 }
@@ -342,7 +388,8 @@ h2 {
   .container {
     max-width: 768px;
   }
-  .card {
+  .card,
+  .player {
     flex-basis: 49%;
   }
 }
@@ -350,12 +397,14 @@ h2 {
   .container {
     max-width: 576px;
   }
-  .card {
+  .card,
+  .player {
     flex-basis: 100%;
   }
 }
 @media (max-width: 576px) {
-  .card {
+  .card,
+  .player {
     flex-basis: 100%;
   }
 }

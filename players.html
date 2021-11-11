@@ -32,44 +32,29 @@
     <!--Main-->
     <div class="container">
       <div class="section-heading">
-        <h2 class="section-title text-gradient">Available Games</h2>
-        <!--<h2 class="section-title text-gradient">Home</h2>-->
-        <hr>
+        <a href="players.html" class="section-title text-gradient disabled">Players</a>
+        <a href="games.html" class="section-title text-gradient">Available Games</a>
       </div>
-      <ul class="nav variant-games nav-pills p-0">
+      <hr>
+      <ul class="nav variant-games nav-pills">
         <li class="navbar-text nav-item p-3">
-          <img src="./img/icon-dota-2-20.png" alt="Dota 2" />
-          <span class="ml-3">Dota 2</span>
+          <img src="/img/players-img/novice.png" alt="Novice" />
+          <span class="ml-3">Novice</span>
         </li>
         <li class="navbar-text nav-item p-3">
-          <img src="/img/icon-cs-go-20.png" alt="CS:GO" />
-          <span class="ml-3">CS:GO</span>
-        </li>
-        <li class="navbar-text nav-item p-3">
-          <img src="/img/icon-wot-20.png" alt="WoT" />
-          <span class="ml-3">WoT</span>
-        </li>
-        <li class="navbar-text nav-item p-3">
-          <img src="./img/icon-lol-20.png" alt="LOL" />
-          <span class="ml-3">LOL</span>
-        </li>
-        <li class="navbar-text nav-item p-3">
-          <img src="./img/icon-pubg-20.png" alt="PUBG" />
-          <span class="ml-3">PUBG</span>
+          <img src="/img/players-img/amateur.png" alt="Amateur" />
+          <span class="ml-3">Amateur</span>
         </li>
         <li class="navbar-text nav-item p-3 mr-0">
-          <img src="./img/icon-farcry-20.png" alt="FARCRY6" />
-          <span class="ml-3">Far Cry 6</span>
+          <img src="/img/players-img/expert.png" alt="Expert" />
+          <span class="ml-3">Expert</span>
         </li>
       </ul>
-      <section class="games-section">
+      <section class="players-section">
         <!--Container Card-->
-      <div class="cards container-card"></div>
+      <div class="players container-players">
+      </div>
     </div>
-      <!--New Game Modal-->
-      <!-- <div id="new-GameModal" class="newGameModal">
-        <button id="newGameButton" class="btn">New Game</button>
-      </div> -->
       <!--Modal-->
       <div id="my-modal" class="modal">
         <div class="modal-content">
@@ -80,21 +65,20 @@
             <div class="modal-map"></div>
           </div>
           <div class="modal-footer">
-            <h3>Buttons Edit, Save</h3>
-            <input id="modal-editBtn" type="button" class="d-none" value="Edit" />
-            <input id="modal-deleteBtn" type="button" class="d-none" value="Delete" />
+            <input id="modal-editBtn" class="btn" type="button" value="Edit" />
+            <input id="modal-deleteBtn" class="btn" type="button" value="Delete" />
           </div>
         </div>
       </div>
       <!--Edit Form-->
-      <div id="edit-form" class="form d-none">
+      <div id="edit-form" class="edit-modal d-none">
         <fieldset>
           <label for="name-input">Name:</label>
           <input id="name-input" type="text" />
         </fieldset>
-        <input id="save-edit" type="button" value="Save" />
+        <input id="save-edit" class='btn' type="button" value="Save" />
       </div>
-    <script src="./script.js" type="module"></script>
-    <script src="./data/data.js" type="module"></script>
+    <script src="players.js" type="module"></script>
+    <script src="/data/players-data.js" type="module"></script>
   </body>
 </html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="icon" href="./img/video-game-controller.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
+      rel="stylesheet"
+    />
+    <title>DMT</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-section">
+        <div class="headerLogo">
+          <img src="/img/death.png" alt="" />
+        </div>
+        <h1 class="header-h1">Deathmatch Tournaments</h1>
+      </div>
+      <div class="header-section">
+        <div class="header-btn mr-3">
+          <button class="btn"><span class="text-gradient">Sign-in</span></button>
+        </div>
+        <div class="header-btn">
+          <button class="btn"><span class="text-gradient">Sign-up</span></button>
+        </div>
+      </div>
+    </div>
+    <!--Main-->
+    <div class="container">
+      <div class="section-heading">
+        <a href="players.html" class="section-title text-gradient">Players</a>
+        <a href="games.html" class="section-title text-gradient disabled">Available Games</a>
+      </div>
+      <hr>
+      <ul class="nav variant-games">
+        <li class="navbar-text nav-item p-3">
+          <img src="./img/games-img/icon-dota-2-20.png" alt="Dota 2" />
+          <span class="ml-3">Dota 2</span>
+        </li>
+        <li class="navbar-text nav-item p-3">
+          <img src="/img/games-img/icon-cs-go-20.png" alt="CS:GO" />
+          <span class="ml-3">CS:GO</span>
+        </li>
+        <li class="navbar-text nav-item p-3">
+          <img src="/img/games-img/icon-wot-20.png" alt="WoT" />
+          <span class="ml-3">WoT</span>
+        </li>
+        <li class="navbar-text nav-item p-3">
+          <img src="./img/games-img/icon-lol-20.png" alt="LOL" />
+          <span class="ml-3">LOL</span>
+        </li>
+        <li class="navbar-text nav-item p-3">
+          <img src="./img/games-img/icon-pubg-20.png" alt="PUBG" />
+          <span class="ml-3">PUBG</span>
+        </li>
+        <li class="navbar-text nav-item p-3 mr-0">
+          <img src="./img/games-img/icon-farcry-20.png" alt="FARCRY6" />
+          <span class="ml-3">Far Cry 6</span>
+        </li>
+      </ul>
+      <section class="games-section">
+        <!--Container Card-->
+      <div class="cards container-card">
+      </div>
+    </div>
+      <!--Modal-->
+      <div id="my-modal" class="modal">
+        <div class="modal-content">
+          <h1 class="modal-name"></h1>
+          <div class="modal-header"></div>
+          <div class="modal-body">
+            <h3 class="modal-details"></h3>
+            <div class="modal-map"></div>
+          </div>
+          <div class="modal-footer">
+            <input id="modal-editBtn" class="btn" type="button" value="Edit" />
+            <input id="modal-deleteBtn" class="btn" type="button" value="Delete" />
+          </div>
+        </div>
+      </div>
+      <!--Edit Form-->
+      <div id="edit-form" class="edit-modal d-none">
+        <fieldset>
+          <label for="name-input">Name:</label>
+          <input id="name-input" type="text" />
+        </fieldset>
+        <input id="save-edit" class='btn' type="button" value="Save" />
+      </div>
+    <script src="games.js" type="module"></script>
+    <script src="/data/games-data.js" type="module"></script>
+  </body>
+</html>
