@@ -29,8 +29,8 @@ function formingPlayersList(data, container) {
 }
 formingPlayersList(playersData, containerPlayers);
 //Edit Data Set
-function editDataSet(containerCard) {
-  const BTN = containerPlayers.querySelectorAll('.detail-btn');
+function editDataSet(container) {
+  const BTN = container.querySelectorAll('.detail-btn');
   BTN.forEach((el) =>
     el.addEventListener('click', function () {
       MODAL.style.display = 'block';
@@ -39,12 +39,12 @@ function editDataSet(containerCard) {
       const mainCard = this.parentNode.parentNode;
       const headerMainCard = mainCard.querySelector('.card-header');
       const cardName = mainCard.querySelector('.card-name');
-      const cardDetails = mainCard.querySelector('.card-details');
+      const cardNickname = mainCard.querySelector('.card-details');
       const cardRank = mainCard.querySelector('.player-rank');
       //Avatar
       const modalHeader = MODAL.querySelector('.modal-header');
       modalHeader.innerHTML = headerMainCard.innerHTML;
-      //Name & Details
+      //Name & Surname
       const modalDetails = MODAL.querySelector('.modal-details');
       const modalName = MODAL.querySelector('.modal-name');
       //Map
@@ -52,23 +52,7 @@ function editDataSet(containerCard) {
       modalMap.innerHTML = cardRank.innerHTML;
       //Carefully with append()
       modalName.append(cardName.innerHTML);
-      modalDetails.append(cardDetails.innerHTML);
-
-      //Edit Data
-      const nameInput = document.getElementById('name-input');
-      const editBtn = document.getElementById('modal-editBtn');
-      editBtn.onclick = function () {
-        const saveButton = document.getElementById('save-edit');
-        const modalForm = document.getElementById('edit-form');
-        modalForm.classList.toggle('d-none');
-        nameInput.value = cardName.innerHTML;
-        saveButton.onclick = function () {
-          cardName.innerHTML = nameInput.value;
-          modalName.innerHTML = nameInput.value;
-          modalForm.classList.toggle('d-none');
-          //document.body.classList.toggle('o-hidden');
-        };
-      };
+      modalDetails.append(cardNickname.innerHTML);
       //Delete Game
       const deleteBtn = document.getElementById('modal-deleteBtn');
       deleteBtn.onclick = function () {
@@ -78,6 +62,29 @@ function editDataSet(containerCard) {
         containerCard.removeChild(mainCard);
         MODAL.style.display = 'none';
         document.body.classList.toggle('o-hidden');
+      };
+      //Edit Data
+      const nameInput = document.getElementById('name-input');
+      const nicknameInput = document.getElementById('details-input');
+      const editBtn = document.getElementById('modal-editBtn');
+      editBtn.onclick = function () {
+        editBtn.disabled = true;
+        deleteBtn.disabled = true;
+        const saveButton = document.getElementById('save-edit');
+        const modalForm = document.getElementById('edit-form');
+        modalForm.classList.toggle('d-none');
+        nameInput.value = cardName.innerHTML;
+        nicknameInput.value = cardNickname.innerHTML;
+        saveButton.onclick = function () {
+          editBtn.disabled = false;
+          deleteBtn.disabled = false;
+          cardName.innerHTML = nameInput.value;
+          cardNickname.innerHTML = nicknameInput.value;
+          modalName.innerHTML = nameInput.value;
+          modalDetails.innerHTML = nicknameInput.value;
+          modalForm.classList.toggle('d-none');
+          //document.body.classList.toggle('o-hidden');
+        };
       };
       //Close Modal
       window.onclick = function (event) {
