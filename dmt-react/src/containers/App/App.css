@@ -116,9 +116,13 @@ a {
 .card-body {
   min-height: 10rem;
 }
+.card-body__rank {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.5rem;
+}
 .card-body__rank img {
   display: block;
-  width: 30%;
+  width: 22%;
   object-fit: cover;
   margin: 0 auto;
 }
@@ -161,7 +165,6 @@ a {
 }
 /*Modal Details*/
 .modal-dialogue {
-  display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 100px; /* Location of the box */
