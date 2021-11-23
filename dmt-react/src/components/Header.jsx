@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 const Header = () => {
   return (
     <header>
@@ -11,12 +13,16 @@ const Header = () => {
           <h1 className="header-section__heading">DeathMatch Tournaments</h1>
         </div>
         <div className="header-section">
-          <button className="header-section__btn mr-3">
-            <span>Login</span>
-          </button>
-          <button className="header-section__btn">
-            <span>Register</span>
-          </button>
+          <Link to="/">
+            <button className="header-section__btn mr-3">
+              <span>Sign in</span>
+            </button>
+          </Link>
+          <Link to="/">
+            <button className="header-section__btn">
+              <span>Sign up</span>
+            </button>
+          </Link>
         </div>
       </div>
     </header>

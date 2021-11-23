@@ -1,9 +1,12 @@
 import React from 'react';
 import './App.css';
 
-import CardsList from '../../components/CardsList';
 import Header from '../../components/Header';
-import Navbar from '../../components/Navbar';
+import Auth from '../../pages/Auth';
+import Games from '../../pages/Games';
+import Players from '../../pages/Players';
+import { Route, Routes } from 'react-router';
+//import { AppBar } from '@mui/material';
 
 const App = () => {
   return (
@@ -11,23 +14,14 @@ const App = () => {
       <Header />
       <main>
         <div className="main-container">
-          <Navbar />
-          <section className="games-list">
-            <div className="cards cards-list_content">
-              <CardsList />
-            </div>
-          </section>
+          <Routes>
+            <Route path="/" element={<Auth />} />
+            <Route exact path="/games" element={<Games />} />
+            <Route exact path="/players" element={<Players />} />
+          </Routes>
         </div>
       </main>
       <footer></footer>
-      <form action="" className="edit-form">
-        <fieldset>
-          <label htmlFor="input-name">Name:</label>
-          <input type="text" id="input-name" />
-          <label htmlFor="input-details">Details:</label>
-          <input type="text" id="input-details" />
-        </fieldset>
-      </form>
     </>
   );
 };

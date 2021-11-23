@@ -6,22 +6,19 @@ localStorage.setItem('gamesData', JSON.stringify(gamesData));
 const gamesDataState = JSON.parse(localStorage.getItem('gamesData'));
 
 class CardsList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      games: gamesDataState,
-    };
-  }
+  state = {
+    games: gamesDataState,
+  };
   render() {
     return this.state.games.map((obj) => (
       <Card
-        key={obj.id}
+        id={obj.id}
         cardName={obj.name}
         cardLogo={obj.logo}
+        cardDetails={obj.details}
         cardMaxPlayers={obj.maxPlayers}
         cardRank={obj.rank}
-        onClickDetail={() => console.log('Clicked DETAIL Button')}
-        //onClickJoin={() => console.log('Clicked JOIN Button')}
+        key={`${obj.id}_${obj.name}`}
       />
     ));
   }

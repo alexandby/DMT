@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Navbar = () => {
+const GamesNavbar = () => {
   return (
     <ul className="games-navbar">
       <li className="games-navbar__content p-3">
@@ -31,4 +31,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default GamesNavbar;

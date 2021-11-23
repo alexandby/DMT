@@ -211,7 +211,6 @@ a {
 }
 /*Edit Details Form*/
 .edit-form {
-  display: none;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -249,6 +248,9 @@ a {
 /*Margin's, padding's, common classes*/
 .d-flex {
   display: flex;
+}
+.w-100 {
+  width: 100%;
 }
 span {
   text-transform: uppercase;
