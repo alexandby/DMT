@@ -5,52 +5,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', cursive;
-  background-color: #1d2132;
-}
-/*Header*/
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  background: #1d2132;
-  font-family: 'Bebas Neue', cursive;
-}
-.header-section__heading {
-  margin: 0;
-  background: linear-gradient(to bottom, #ff0000 33%, #fffb00 66%, #8aa9d6);
-  padding: 1rem;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-a {
-  color: white;
-  text-decoration: none;
-}
-.header-section {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-}
-.header-section__btn {
-  min-width: 6rem;
-  box-shadow: 7px 9px 11px rgb(29 33 50 / 25%);
-  font-weight: 600;
-  font-size: 0.6875rem;
-  line-height: 1.18181818;
-  padding: 0.625rem 1.25rem;
-  user-select: none;
-  border: 0 solid transparent;
-  border-radius: 1.125rem;
-  transition: 0.15s ease-in-out;
-  cursor: pointer;
-  font-family: 'Montserrat', cursive;
-}
-.header-section__btn:hover {
-  margin-bottom: 0.5rem;
-  box-shadow: 0px 5px 8px 10px #ff0000;
-}
-.header-section__btn:active {
-  outline: none;
-  box-shadow: 0 0 0 3px #ffb000;
 }
 /*Main*/
 .main-container {
@@ -88,66 +42,12 @@ a {
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.card {
-  justify-content: start;
-  width: auto;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 4px;
-  margin-bottom: 1.4375rem;
-  background: linear-gradient(90deg, #ff0000, #fffb00);
-  overflow: hidden;
-  text-decoration: none;
-  padding: 0.4375rem;
-  border-radius: 1rem;
-}
-.card-header {
-  display: flex;
-  flex-direction: column;
-  background-size: 100%;
-  background-repeat: repeat;
-  background-position: center;
-  border-radius: 1rem;
-}
-.card-header img {
-  width: 100%;
-  object-fit: cover;
-  border: 0.4375rem;
-  border-radius: 0.4375rem;
-}
-.card-body {
-  min-height: 10rem;
-}
-.card-body__rank {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.5rem;
-}
-.card-body__rank img {
-  display: block;
-  width: 22%;
-  object-fit: cover;
-  margin: 0 auto;
-}
-.card-footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  min-height: 5rem;
-  align-items: center;
-  vertical-align: middle;
-}
-.card:hover .detail-btn {
-  display: block;
-}
 .player:hover .detail-btn {
   display: block;
 }
 .detail-btn:hover,
 .join-btn:hover {
   margin-bottom: 0.5rem;
-}
-.card:hover {
-  background: linear-gradient(180deg, #1a1e2d, #1a1e2d);
-  position: relative;
-  z-index: 1;
 }
 .new-game-button {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 4px;

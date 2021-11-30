@@ -3,19 +3,19 @@ import React from 'react';
 import GamesNavbar from '../components/GamesNavbar';
 import CardsList from '../components/CardsList';
 import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 
-const Games = () => {
+const Games = (props) => {
   return (
     <>
       <GamesNavbar />
-      <section className="games-list">
-        <div className="cards cards-list_content">
-          <CardsList />
-        </div>
-      </section>
+      <Grid container spacing={8} direction="row" wrap="wrap">
+        <CardsList />
+      </Grid>
       <Link to="/players">
-        <Button color="warning">Players</Button>
+        <Button variant="outlined" color="warning">
+          Players
+        </Button>
       </Link>
     </>
   );

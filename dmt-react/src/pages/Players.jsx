@@ -1,7 +1,8 @@
 import React from 'react';
+import PlayersNavbar from '../components/PlayersNavbar';
 
 const Players = () => {
-  return <div></div>;
+  return <PlayersNavbar />;
 };
 
 export default Players;
