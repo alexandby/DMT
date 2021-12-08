@@ -10,14 +10,17 @@ import {
   MenuItem,
   Tooltip,
   Button,
+  Grid,
+  CardMedia,
 } from '@mui/material';
 import React, { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 //import { Link } from 'react-router-dom';
 
 const pages = ['Games', 'Players'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Logout'];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -40,7 +43,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: '#1d2132' }}>
+    <AppBar position="static" sx={{ bgcolor: '#1d2132', padding: '1rem', mb: '4rem' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -51,7 +54,10 @@ const Header = () => {
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'Bebas Neue',
-              fontSize: '3rem',
+              fontSize: '2rem',
+              background: 'linear-gradient(90deg, #ff0000, #fffb00)',
+              WebkitTextFillColor: 'transparent',
+              WebkitBackgroundClip: 'text',
             }}
           >
             Deathmatch Tournaments
@@ -85,42 +91,39 @@ const Header = () => {
               sx={{
                 display: { xs: 'block', md: 'none' },
               }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            ></Menu>
           </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-          >
-            LOGO
-          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+              ></Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt="Remy Sharp"
+                  src="/img/death.png"
+                  sx={{ height: '3.5rem', width: '3.5rem' }}
+                />
+                <Grid sx={{ ml: '0.5rem', mr: '0.5rem' }}>
+                  <Grid item>
+                    <Typography variant="body2" sx={{ color: 'gray' }}>
+                      user1
+                    </Typography>
+                    <CardMedia component="img" image="/img/players-img/novice.png" height="30" />
+                  </Grid>
+                </Grid>
+                <MoreVertIcon sx={{ color: 'gray' }} fontSize="large" />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: '60px', width: 320, maxWidth: '100%' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
