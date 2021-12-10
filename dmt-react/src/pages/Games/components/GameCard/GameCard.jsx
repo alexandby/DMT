@@ -27,7 +27,7 @@ const ExpandMore = styled((props) => {
 
 const GameCard = (props) => {
   const [expanded, setExpanded] = React.useState(false);
-  const { logo, name, signPlayers, maxPlayers, rank, cardMap } = props.details;
+  const { id, logo, name, signPlayers, maxPlayers, rank, cardMap } = props.details;
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -111,7 +111,7 @@ const GameCard = (props) => {
         <IconButton
           aria-label="delete game card"
           sx={{ fontSize: 'large' }}
-          onClick={props.onDelete}
+          onClick={() => props.onDelete(id)}
         >
           <DeleteIcon />
         </IconButton>
@@ -146,7 +146,7 @@ const GameCard = (props) => {
               <Typography variant="subtitle2" sx={{ fontFamily: 'Montserrat', padding: 1 }}>
                 Edit
               </Typography>
-              <IconButton aria-label="edit current game" onClick={props.onEdit}>
+              <IconButton aria-label="edit current game" onClick={() => props.onEdit(id)}>
                 <EditIcon />
               </IconButton>
             </Grid>

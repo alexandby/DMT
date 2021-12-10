@@ -7,8 +7,10 @@ import { Container } from '@mui/material';
 const App = () => {
   return (
     <>
+      {/*Header of app*/}
       <Header />
       <Container component="main">
+        {/*Page with table of games*/}
         <Games />
       </Container>
     </>

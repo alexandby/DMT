@@ -15,79 +15,90 @@ const style = {
 
 class EditGameCard extends Component {
   state = {
-    isOpen: false,
+    gameEditState: this.props.gameEdit,
   };
-
-  handleOpen = () => {
-    this.setState({ isOpen: true });
-  };
-
-  handleClose = () => {
-    this.setState({ isOpen: false });
-  };
-
   handleChange = (event) => {
-    const editedGame = {
-      ...this.props.game,
+    const updatedGame = {
+      ...this.state.gameEditState,
+      [event.currentTarget.name]: event.currentTarget.value,
     };
-    this.props.editGame(this.props.index, editedGame);
+    this.setState({
+      gameEditState: updatedGame,
+    });
+    this.props.updateGame(updatedGame, this.props.index);
   };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+  };
+  //Was a problem with props in state, but it's gone
+  // static getDerivedStateFromProps(props, state) {
+  //   if (props.gameEdit.length !== state.gameEditState.length) {
+  //     return {
+  //       gameEditState: props.gameEdit,
+  //     };
+  //   }
+  //   return null;
+  // }
+
   render() {
     return (
       <>
-        <Modal open={this.state.isOpen} onClose={this.handleClose}>
-          <Box sx={style} component="form" onSubmit={this.handleClose}>
+        <Modal open onClose={this.props.closeModal}>
+          <Box sx={style} component="form" onSubmit={this.handleSubmit}>
             <Input
+              id="logo-input"
               onChange={this.handleChange}
               name="logo"
               type="text"
-              value={this.props.game.logo}
+              value={this.state.gameEditState.logo}
             />
             <Input
+              id="name-input"
               onChange={this.handleChange}
               name="name"
               type="text"
-              value={this.props.game.name}
+              value={this.state.gameEditState.name}
+              autoComplete="off"
             />
             <TextField
               onChange={this.handleChange}
+              id="details-input"
               name="details"
               type="text"
-              value={this.props.game.details}
+              value={this.state.gameEditState.details}
+              autoComplete="off"
             />
             <Input
-              onChange={this.handleChange}
-              name="map"
               type="text"
-              value={this.props.game.cardMap}
+              onChange={this.handleChange}
+              value={this.state.gameEditState.cardMap}
+              autoComplete="off"
+              name="cardMap"
             />
             <InputLabel />
             <Input
               id="sign-players"
               type="text"
+              onChange={this.handleChange}
               value="0"
               autoComplete="off"
-              name="Sign Players"
+              name="signPlayers"
               disabled
             />
             <Input
+              type="text"
               onChange={this.handleChange}
-              name="max players"
-              type="text"
-              value={this.props.game.maxPlayers}
-            />
-            <Input
-              onChange={this.handleChange}
-              name="rank"
-              type="text"
-              value={this.props.game.rank}
-            />
-            <Input
-              type="text"
-              inputRef={this.startTimeRef}
-              placeholder="Start time"
+              value={this.state.gameEditState.maxPlayers}
               autoComplete="off"
-              name="starttime"
+              name="maxPlayers"
+            />
+            <Input
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.gameEditState.rank}
+              autoComplete="off"
+              name="rank"
             />
             <Button type="submit">Save</Button>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
