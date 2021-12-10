@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Box, Typography, Button, Modal, Input, TextField, InputLabel } from '@mui/material';
 
 const style = {
@@ -14,6 +15,20 @@ const style = {
 };
 
 class EditGameCard extends Component {
+  static propTypes = {
+    gameEdit: PropTypes.shape({
+      logo: PropTypes.string,
+      name: PropTypes.string,
+      details: PropTypes.string,
+      rank: PropTypes.string,
+      cardMap: PropTypes.string,
+      signPlayers: PropTypes.number,
+      maxPlayers: PropTypes.number,
+    }),
+    index: PropTypes.string,
+    updateGame: PropTypes.func,
+    closeModal: PropTypes.func,
+  };
   state = {
     gameEditState: this.props.gameEdit,
   };

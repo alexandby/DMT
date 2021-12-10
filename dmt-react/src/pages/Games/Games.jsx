@@ -10,6 +10,7 @@ import AddGameCard from './components/GameCard/AddGameCard';
 import { gamesData } from '../../db/games';
 import EditGameCard from './components/GameCard/EditGameCard';
 
+// localStorage.setItem('gamesData', JSON.stringify(gamesData));
 export default class Games extends Component {
   state = {
     games: gamesData,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Box, Typography, Button, Modal, Input, TextField, InputLabel } from '@mui/material';
 
 const style = {
@@ -14,6 +15,9 @@ const style = {
 };
 
 class AddGameCard extends Component {
+  static propTypes = {
+    addGame: PropTypes.func,
+  };
   state = {
     game: { id: `game7`, signPlayers: 0 },
     isOpen: false,
