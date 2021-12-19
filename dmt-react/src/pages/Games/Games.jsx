@@ -1,48 +1,73 @@
-//Page view for code review!
 import React, { Component } from 'react';
 
-import { Grid } from '@mui/material';
-
-import GamesNavbar from './components/GamesNavbar';
 import GameCard from './components/GameCard';
-import AddGameCard from './components/GameCard/AddGameCard';
+import AdminGameCard from './components/AdminGameCard';
 
 import { gamesData } from '../../db/games';
-import EditGameCard from './components/GameCard/EditGameCard';
 
-// localStorage.setItem('gamesData', JSON.stringify(gamesData));
+import { styled } from '@mui/system';
+import { Grid, IconButton } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+
+const MyAddIcon = styled(AddIcon)({
+  width: '100px',
+  height: '100px',
+  color: 'orange',
+});
+
 export default class Games extends Component {
   state = {
     games: gamesData,
-    editModal: false,
+    openModal: false,
   };
 
   componentDidMount() {
     const gamesDataLS = JSON.parse(localStorage.getItem('gamesData'));
-    this.setState((oldState) => ({
-      games: (oldState.games = gamesDataLS),
-    }));
+    gamesDataLS !== null
+      ? this.setState((oldState) => ({
+          games: (oldState.games = gamesDataLS),
+        }))
+      : localStorage.setItem('gamesData', JSON.stringify(gamesData));
   }
 
   componentDidUpdate() {
     localStorage.setItem('gamesData', JSON.stringify(this.state.games));
   }
 
-  addGame = (game) => {
-    this.setState({ games: [...this.state.games, game] });
+  closeModal = () => {
+    this.setState({ openModal: false });
   };
 
-  editItem = (key) => {
-    this.setState({ gameEdit: this.state.games[key], editModal: true, gameEditIndex: key });
-  };
-  closeEditModal = () => {
-    this.setState({ editModal: false });
+  addGame = (game, key) => {
+    const games = { ...this.state.games };
+    key = Object.values(games).length;
+    games[key] = game;
+    this.setState({ games });
   };
 
   updateGame = (game, key) => {
     const games = { ...this.state.games };
     games[key] = game;
     this.setState({ games });
+  };
+
+  editIndex = (key) => {
+    this.state.games[key] !== undefined
+      ? this.setState({ gameEdit: this.state.games[key], openModal: true, gameEditIndex: key })
+      : this.setState({
+          gameEdit: {
+            id: 'game7',
+            name: '',
+            details: '',
+            logo: '',
+            rank: '',
+            cardMap: '',
+            signPlayers: 0,
+            maxPlayers: 0,
+          },
+          gameEditIndex: undefined,
+          openModal: true,
+        });
   };
 
   deleteGame = (id) => {
@@ -53,35 +78,35 @@ export default class Games extends Component {
   render() {
     return (
       <>
-        <GamesNavbar />
-        <Grid container spacing={8} direction="row" wrap="wrap">
-          {Object.keys(this.state.games).map((key) => {
-            return (
-              <Grid key={key + 1} item xs={12} md={6} lg={4} align="center">
-                <GameCard
-                  key={key}
-                  index={key}
-                  details={this.state.games[key]}
-                  onDelete={this.deleteGame}
-                  //Get key of edit btn
-                  onEdit={this.editItem.bind(null, key)}
-                />
-              </Grid>
-            );
-          })}
+        {Object.keys(this.state.games).map((key) => {
+          return (
+            <Grid key={key} item xs={12} md={6} lg={4} align="center">
+              <GameCard
+                details={this.state.games[key]}
+                onDelete={this.deleteGame}
+                onEdit={this.editIndex.bind(null, key)}
+              />
+            </Grid>
+          );
+        })}
+        <Grid item xs={12} md={6} lg={4} align="center">
+          <IconButton onClick={this.editIndex}>
+            <MyAddIcon />
+          </IconButton>
         </Grid>
-        <AddGameCard addGame={this.addGame} />
-        {/*If edit btn was pressed, editModal becomes true*/}
-        {this.state.editModal ? (
-          <EditGameCard
-            //Current game card with data
+
+        {this.state.openModal ? (
+          <AdminGameCard
+            //Add new game to list
+            addGame={this.addGame}
+            //Update game with current index
+            updateGame={this.updateGame}
+            //Game card data
             gameEdit={this.state.gameEdit}
             //Index of pressed game card
             index={this.state.gameEditIndex}
-            //Update state with new data of pressed game card
-            updateGame={this.updateGame}
-            //Makes editModal false
-            closeModal={this.closeEditModal}
+            //Open modal
+            modal={this.closeModal}
           />
         ) : null}
       </>

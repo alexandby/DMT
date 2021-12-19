@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import Games from './pages/Games/Games';
-import { Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 
 const App = () => {
   return (
@@ -11,7 +11,9 @@ const App = () => {
       <Header />
       <Container component="main">
         {/*Page with table of games*/}
-        <Games />
+        <Grid container spacing={8} direction="row" wrap="wrap">
+          <Games />
+        </Grid>
       </Container>
     </>
   );

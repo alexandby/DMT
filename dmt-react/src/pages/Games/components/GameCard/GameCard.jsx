@@ -1,30 +1,19 @@
 import React from 'react';
-import { styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
 import {
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  IconButton,
-  Typography,
-  Grid,
-  Collapse,
-} from '@mui/material';
+  GameCardWrapper,
+  GameCardTypography,
+  GameCardActions,
+  GameCardCollapse,
+  BebasTypography,
+  ExpandMore,
+} from './StyledComponents';
+import { CardContent, CardMedia, IconButton, Grid } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import EditIcon from '@mui/icons-material/Edit';
 import { Component } from 'react';
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
 
 class GameCard extends Component {
   state = {
@@ -36,76 +25,27 @@ class GameCard extends Component {
     }));
   };
   render() {
-    const { id, logo, name, signPlayers, maxPlayers, rank, cardMap } = this.props.details;
+    const { id, logo, name, signPlayers, maxPlayers, rank, cardMap } = this.props.details || {};
     return (
-      <Card
-        sx={{
-          width: 345,
-          background: 'linear-gradient(135deg,#2b324d,#212639)',
-          boxShadow: '13px 13px 20px 4px rgba(43, 50, 77, 0.98)',
-        }}
-      >
-        <CardMedia
-          sx={{
-            px: '1rem',
-            pt: '1rem',
-            width: 'auto',
-          }}
-          component="img"
-          height="194"
-          image={logo}
-          alt="cardHeaderImg"
-        />
+      <GameCardWrapper>
+        <CardMedia component="img" height="194" image={logo} alt="cardHeaderImg" />
         <CardContent>
           <Grid container direction="row" wrap="wrap">
             <Grid item xs={6}>
-              <Typography
-                variant="subtitle2"
-                color="white"
-                align="left"
-                sx={{ fontFamily: 'Montserrat' }}
-              >
-                Current players:
-              </Typography>
-              <Typography variant="h5" color="white" align="left" sx={{ fontFamily: 'Montserrat' }}>
-                {signPlayers}
-              </Typography>
-              <Typography
-                variant="subtitle2"
-                color="white"
-                align="left"
-                sx={{ fontFamily: 'Montserrat' }}
-              >
-                Max players:
-              </Typography>
-              <Typography variant="h5" color="white" align="left" sx={{ fontFamily: 'Montserrat' }}>
-                {maxPlayers}
-              </Typography>
+              <GameCardTypography variant="subtitle2" align="left">
+                Current players: {signPlayers}
+              </GameCardTypography>
+              <GameCardTypography variant="subtitle2" align="left">
+                Max players: {maxPlayers}
+              </GameCardTypography>
             </Grid>
-            <Grid item xs={6} sx={{ textAlign: 'center' }}>
-              <Typography
-                variant="h5"
-                color="text.primary"
-                sx={{
-                  fontFamily: 'Bebas Neue',
-                  background: 'linear-gradient(90deg, #ff0000, #fffb00)',
-                  WebkitTextFillColor: 'transparent',
-                  WebkitBackgroundClip: 'text',
-                }}
-              >
-                Required rank:
-              </Typography>
-              <CardMedia sx={{ marginTop: 0.5 }} component="img" image={rank} alt="card rank img" />
+            <Grid item xs={6}>
+              <BebasTypography variant="h5">Required rank:</BebasTypography>
+              <CardMedia component="img" image={rank} alt="card rank img" />
             </Grid>
           </Grid>
         </CardContent>
-        <CardActions
-          disableSpacing
-          sx={{
-            background: 'linear-gradient(90deg, #ff0000, #fffb00)',
-            justifyContent: 'center',
-          }}
-        >
+        <GameCardActions disableSpacing>
           <ExpandMore
             expand={this.state.expanded}
             onClick={this.handleExpandClick}
@@ -114,53 +54,53 @@ class GameCard extends Component {
           >
             <MoreHorizIcon />
           </ExpandMore>
-          <IconButton
-            aria-label="delete game card"
-            sx={{ fontSize: 'large' }}
-            onClick={() => this.props.onDelete(id)}
-          >
+          <IconButton aria-label="delete game card" onClick={() => this.props.onDelete(id)}>
             <DeleteIcon />
           </IconButton>
-          <IconButton aria-label="play current game">
-            <PlayArrowIcon />
+          <IconButton aria-label="play current game" onClick={() => this.props.onEdit(id)}>
+            <EditIcon />
           </IconButton>
-        </CardActions>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          <CardContent
-            sx={{
-              background: 'linear-gradient(90deg, #ff0000, #fffb00)',
-              py: 0,
-            }}
-          >
-            <Typography variant="subtitle2" sx={{ fontFamily: 'Montserrat' }} editable="true">
+        </GameCardActions>
+        <GameCardCollapse in={this.state.expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <GameCardTypography variant="subtitle2" editable="true">
               Name: {name}
-            </Typography>
+            </GameCardTypography>
             <Grid container>
-              <Grid item xs={6} sx={{ pb: '16px' }}>
-                <Typography variant="subtitle2" sx={{ fontFamily: 'Montserrat', padding: 1 }}>
-                  Map:
-                </Typography>
+              <Grid item xs={6}>
+                <GameCardTypography variant="subtitle2">Map:</GameCardTypography>
                 <CardMedia component="img" image={cardMap} alt="card map img" />
               </Grid>
               <Grid item xs={6}>
-                <Typography variant="subtitle2" sx={{ fontFamily: 'Montserrat', padding: 1 }}>
-                  Created by:
-                </Typography>
+                <GameCardTypography variant="subtitle2">Created by:</GameCardTypography>
                 <IconButton aria-label="play current game">
                   <CardMedia component="img" image="/img/death.png" />
                 </IconButton>
-                <Typography variant="subtitle2" sx={{ fontFamily: 'Montserrat', padding: 1 }}>
-                  Edit
-                </Typography>
-                <IconButton aria-label="edit current game" onClick={() => this.props.onEdit(id)}>
-                  <EditIcon />
-                </IconButton>
               </Grid>
             </Grid>
+            <GameCardTypography variant="subtitle2">Join</GameCardTypography>
+            <IconButton aria-label="edit current game" onClick={() => console.log('Joined!')}>
+              <PlayArrowIcon />
+            </IconButton>
           </CardContent>
-        </Collapse>
-      </Card>
+        </GameCardCollapse>
+      </GameCardWrapper>
     );
   }
 }
 export default GameCard;
+
+GameCard.propTypes = {
+  details: PropTypes.shape({
+    logo: PropTypes.string,
+    name: PropTypes.string,
+    details: PropTypes.string,
+    rank: PropTypes.string,
+    cardMap: PropTypes.string,
+    signPlayers: PropTypes.number,
+    maxPlayers: PropTypes.number,
+  }),
+  index: PropTypes.string,
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func,
+};
