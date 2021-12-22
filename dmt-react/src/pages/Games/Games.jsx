@@ -38,9 +38,9 @@ export default class Games extends Component {
     this.setState({ openModal: false });
   };
 
-  addGame = (game, key) => {
+  addGame = (game) => {
     const games = { ...this.state.games };
-    key = Object.values(games).length;
+    const key = Object.values(games).length;
     games[key] = game;
     this.setState({ games });
   };
@@ -72,7 +72,8 @@ export default class Games extends Component {
 
   deleteGame = (id) => {
     const games = { ...this.state.games };
-    this.setState({ games: Object.values(games).filter((el) => el.id !== id) });
+    const gamesValues = Object.values(games);
+    this.setState({ games: gamesValues.filter((el) => el.id !== id) });
   };
 
   render() {

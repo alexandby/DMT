@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Typography, Button, Modal, Input, TextField, InputLabel } from '@mui/material';
+import { Button, Modal } from '@mui/material';
+import { AdminBox, AdmInput, BtnBox, PlayersTyp } from './StyledComponents';
+import SaveIcon from '@mui/icons-material/Save';
+import AddIcon from '@mui/icons-material/Add';
 
 class AdminGameCard extends Component {
   state = {
@@ -38,66 +41,59 @@ class AdminGameCard extends Component {
     return (
       <>
         <Modal open>
-          <Box className="box" component="form" onSubmit={this.handleSubmit}>
-            <Input
+          <AdminBox className="box" component="form" onSubmit={this.handleSubmit}>
+            <PlayersTyp variant="subtitle2">Logo:</PlayersTyp>
+            <AdmInput
               id="logo-input"
               onChange={this.handleChange}
               name="logo"
               type="text"
               value={this.state.gameEditState.logo}
+              disableUnderline
             />
-            <Input
+            <PlayersTyp variant="subtitle2">Name:</PlayersTyp>
+            <AdmInput
               id="name-input"
               onChange={this.handleChange}
               name="name"
               type="text"
               value={this.state.gameEditState.name}
               autoComplete="off"
+              disableUnderline
             />
-            <TextField
-              onChange={this.handleChange}
-              id="details-input"
-              name="details"
-              type="text"
-              value={this.state.gameEditState.details}
-              autoComplete="off"
-            />
-            <Input
+            <PlayersTyp variant="subtitle2">Map:</PlayersTyp>
+            <AdmInput
               type="text"
               onChange={this.handleChange}
               value={this.state.gameEditState.cardMap}
               autoComplete="off"
               name="cardMap"
+              disableUnderline
             />
-            <InputLabel />
-            <Input
-              id="sign-players"
-              type="text"
-              onChange={this.handleChange}
-              value="0"
-              autoComplete="off"
-              name="signPlayers"
-              disabled
-            />
-            <Input
-              type="text"
+            <PlayersTyp variant="subtitle2">Max Players:</PlayersTyp>
+            <AdmInput
+              type="number"
               onChange={this.handleChange}
               value={this.state.gameEditState.maxPlayers}
               autoComplete="off"
               name="maxPlayers"
+              disableUnderline
             />
-            <Input
+            <PlayersTyp variant="subtitle2">Required Rank:</PlayersTyp>
+            <AdmInput
               type="text"
               onChange={this.handleChange}
               value={this.state.gameEditState.rank}
               autoComplete="off"
               name="rank"
+              disableUnderline
             />
-            <Button type="submit">{this.props.index ? 'Save' : 'Add'}</Button>
-            <Typography id="modal-modal-description" className="mt">
-              Edit current game or create something new!
-            </Typography>
-          </Box>
+            <BtnBox>
+              <Button type="submit" color="inherit">
+                {this.props.index ? <SaveIcon /> : <AddIcon />}
+              </Button>
+            </BtnBox>
+          </AdminBox>
         </Modal>
       </>
     );

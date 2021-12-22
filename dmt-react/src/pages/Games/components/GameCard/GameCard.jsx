@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  GameCardWrapper,
-  GameCardTypography,
+  Wrapper,
   GameCardActions,
+  ExpandMap,
+  PlayersTyp,
+  PlayersBox,
+  RankTyp,
+  NameTyp,
+  MapTyp,
   GameCardCollapse,
-  BebasTypography,
-  ExpandMore,
+  MapMedia,
+  LogoMedia,
+  RankMedia,
+  GridCard,
 } from './StyledComponents';
-import { CardContent, CardMedia, IconButton, Grid } from '@mui/material';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { IconButton, Grid } from '@mui/material';
+import MapIcon from '@mui/icons-material/Map';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import EditIcon from '@mui/icons-material/Edit';
-import { Component } from 'react';
 
 class GameCard extends Component {
   state = {
@@ -27,68 +33,52 @@ class GameCard extends Component {
   render() {
     const { id, logo, name, signPlayers, maxPlayers, rank, cardMap } = this.props.details || {};
     return (
-      <GameCardWrapper>
-        <CardMedia component="img" height="194" image={logo} alt="cardHeaderImg" />
-        <CardContent>
-          <Grid container direction="row" wrap="wrap">
-            <Grid item xs={6}>
-              <GameCardTypography variant="subtitle2" align="left">
-                Current players: {signPlayers}
-              </GameCardTypography>
-              <GameCardTypography variant="subtitle2" align="left">
-                Max players: {maxPlayers}
-              </GameCardTypography>
-            </Grid>
-            <Grid item xs={6}>
-              <BebasTypography variant="h5">Required rank:</BebasTypography>
-              <CardMedia component="img" image={rank} alt="card rank img" />
-            </Grid>
+      <Wrapper>
+        <GridCard container direction="row" wrap="wrap">
+          <PlayersTyp variant="subtitle2">Logo:</PlayersTyp>
+          <LogoMedia component="img" image={logo} alt="cardHeaderImg" />
+          <Grid item xs={12}>
+            <PlayersTyp variant="subtitle2">Name: </PlayersTyp>
+            <NameTyp variant="subtitle2">{name}</NameTyp>
           </Grid>
-        </CardContent>
-        <GameCardActions disableSpacing>
-          <ExpandMore
+          <Grid item xs={6}>
+            <PlayersTyp variant="subtitle2">Current players:</PlayersTyp>
+            <PlayersBox>{signPlayers}</PlayersBox>
+            <PlayersTyp variant="subtitle2">Max players:</PlayersTyp>
+            <PlayersBox>{maxPlayers}</PlayersBox>
+          </Grid>
+          <Grid item xs={6}>
+            <RankTyp variant="h5">Required rank:</RankTyp>
+            <RankMedia component="img" image={rank} alt="cardRankImg" />
+          </Grid>
+        </GridCard>
+        <GameCardActions>
+          <ExpandMap
             expand={this.state.expanded}
             onClick={this.handleExpandClick}
             aria-expanded={this.state.expanded}
-            aria-label="show more"
+            aria-label="showMap"
           >
-            <MoreHorizIcon />
-          </ExpandMore>
-          <IconButton aria-label="delete game card" onClick={() => this.props.onDelete(id)}>
-            <DeleteIcon />
+            <MapIcon />
+          </ExpandMap>
+          <IconButton aria-label="playCurGame" onClick={() => console.log('Joined!')}>
+            <PlayArrowIcon />
           </IconButton>
-          <IconButton aria-label="play current game" onClick={() => this.props.onEdit(id)}>
+          <IconButton aria-label="editCurGame" onClick={() => this.props.onEdit(id)}>
             <EditIcon />
+          </IconButton>
+          <IconButton aria-label="delGameCard" onClick={() => this.props.onDelete(id)}>
+            <DeleteIcon />
           </IconButton>
         </GameCardActions>
         <GameCardCollapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <GameCardTypography variant="subtitle2" editable="true">
-              Name: {name}
-            </GameCardTypography>
-            <Grid container>
-              <Grid item xs={6}>
-                <GameCardTypography variant="subtitle2">Map:</GameCardTypography>
-                <CardMedia component="img" image={cardMap} alt="card map img" />
-              </Grid>
-              <Grid item xs={6}>
-                <GameCardTypography variant="subtitle2">Created by:</GameCardTypography>
-                <IconButton aria-label="play current game">
-                  <CardMedia component="img" image="/img/death.png" />
-                </IconButton>
-              </Grid>
-            </Grid>
-            <GameCardTypography variant="subtitle2">Join</GameCardTypography>
-            <IconButton aria-label="edit current game" onClick={() => console.log('Joined!')}>
-              <PlayArrowIcon />
-            </IconButton>
-          </CardContent>
+          <MapTyp variant="subtitle2">Map:</MapTyp>
+          <MapMedia component="img" image={cardMap} alt="cardHeaderImg" />
         </GameCardCollapse>
-      </GameCardWrapper>
+      </Wrapper>
     );
   }
 }
-export default GameCard;
 
 GameCard.propTypes = {
   details: PropTypes.shape({
@@ -104,3 +94,5 @@ GameCard.propTypes = {
   onDelete: PropTypes.func,
   onEdit: PropTypes.func,
 };
+
+export default GameCard;

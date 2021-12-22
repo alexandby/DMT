@@ -1,24 +1,21 @@
-import { AppBar, Menu, Typography, Box } from '@mui/material';
+import { AppBar, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const HeaderAppBar = styled(AppBar)({
-  backgroundColor: '#1d2132',
-  padding: '1rem',
+  background: 'linear-gradient(135deg,#2b324d,#212639)',
   marginBottom: '4rem',
 });
 
-export const HeaderTypography = styled(Typography)({
-  mr: 2,
-  display: { xs: 'none', md: 'flex' },
-  fontFamily: 'Bebas Neue',
-  fontSize: '2rem',
+export const HButton = styled(Button)({
   background: 'linear-gradient(90deg, #ff0000, #fffb00)',
-  WebkitTextFillColor: 'transparent',
-  WebkitBackgroundClip: 'text',
+  color: 'black',
+  width: '80px',
 });
 
-export const HeaderMenu = styled(Menu)({
-  marginTop: '60px',
-  width: 320,
-  maxWidth: '100%',
+export const LogoTyp = styled(Typography)({
+  fontFamily: 'Bebas Neue',
+  background: 'linear-gradient(180deg, #ff0000, #fffb00)',
+  WebkitTextFillColor: 'transparent',
+  WebkitBackgroundClip: 'text',
+  flexGrow: 1,
 });
