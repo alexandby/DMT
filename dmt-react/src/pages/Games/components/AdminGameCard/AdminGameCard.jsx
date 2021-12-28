@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { updateGame } from '../../../../redux/actions/gamesActions';
+
 import PropTypes from 'prop-types';
 import { Button, Modal } from '@mui/material';
 import { AdminBox, AdmInput, BtnBox, PlayersTyp } from './StyledComponents';
 import SaveIcon from '@mui/icons-material/Save';
-import AddIcon from '@mui/icons-material/Add';
 
 class AdminGameCard extends Component {
   state = {
     gameEditState: {},
-    isOpen: false,
   };
 
   componentDidMount() {
@@ -17,31 +18,25 @@ class AdminGameCard extends Component {
     });
   }
 
-  handleClose = () => {
-    this.setState({ isOpen: false });
-  };
-  handleChange = (event) => {
+  handleChange = (e) => {
     this.setState({
       gameEditState: {
         ...this.state.gameEditState,
-        [event.currentTarget.name]: event.currentTarget.value,
+        [e.target.name]: e.target.value,
       },
     });
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.index === undefined
-      ? this.props.addGame(this.state.gameEditState)
-      : this.props.updateGame(this.state.gameEditState, this.props.index);
-    this.props.modal();
+  onSubmit = (e) => {
+    e.preventDefault();
+    this.props.updateGame(this.state.gameEditState, this.props.index);
   };
 
   render() {
     return (
       <>
         <Modal open>
-          <AdminBox className="box" component="form" onSubmit={this.handleSubmit}>
+          <AdminBox className="box" component="form" onSubmit={this.onSubmit}>
             <PlayersTyp variant="subtitle2">Logo:</PlayersTyp>
             <AdmInput
               id="logo-input"
@@ -90,7 +85,7 @@ class AdminGameCard extends Component {
             />
             <BtnBox>
               <Button type="submit" color="inherit">
-                {this.props.index ? <SaveIcon /> : <AddIcon />}
+                <SaveIcon />
               </Button>
             </BtnBox>
           </AdminBox>
@@ -100,7 +95,13 @@ class AdminGameCard extends Component {
   }
 }
 
-export default AdminGameCard;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateGame: (game, i) => dispatch(updateGame(game, i)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(AdminGameCard);
 
 AdminGameCard.propTypes = {
   gameEdit: PropTypes.shape({

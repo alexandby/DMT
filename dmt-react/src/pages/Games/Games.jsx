@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import GameCard from './components/GameCard';
 import AdminGameCard from './components/AdminGameCard';
 
-import { gamesData } from '../../db/games';
-
 import { styled } from '@mui/system';
 import { Grid, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+
+import { removeGame, editGame, addGame } from '../../redux/actions/gamesActions';
 
 const MyAddIcon = styled(AddIcon)({
   width: '100px',
@@ -15,102 +16,57 @@ const MyAddIcon = styled(AddIcon)({
   color: 'orange',
 });
 
-export default class Games extends Component {
-  state = {
-    games: gamesData,
-    openModal: false,
-  };
-
-  componentDidMount() {
-    const gamesDataLS = JSON.parse(localStorage.getItem('gamesData'));
-    gamesDataLS !== null
-      ? this.setState((oldState) => ({
-          games: (oldState.games = gamesDataLS),
-        }))
-      : localStorage.setItem('gamesData', JSON.stringify(gamesData));
+class Games extends Component {
+  remove(i) {
+    this.props.removeGame(i);
   }
 
-  componentDidUpdate() {
-    localStorage.setItem('gamesData', JSON.stringify(this.state.games));
+  edit(i, game) {
+    this.props.editGame(i, game);
   }
-
-  closeModal = () => {
-    this.setState({ openModal: false });
-  };
-
-  addGame = (game) => {
-    const games = { ...this.state.games };
-    const key = Object.values(games).length;
-    games[key] = game;
-    this.setState({ games });
-  };
-
-  updateGame = (game, key) => {
-    const games = { ...this.state.games };
-    games[key] = game;
-    this.setState({ games });
-  };
-
-  editIndex = (key) => {
-    this.state.games[key] !== undefined
-      ? this.setState({ gameEdit: this.state.games[key], openModal: true, gameEditIndex: key })
-      : this.setState({
-          gameEdit: {
-            id: 'game7',
-            name: '',
-            details: '',
-            logo: '',
-            rank: '',
-            cardMap: '',
-            signPlayers: 0,
-            maxPlayers: 0,
-          },
-          gameEditIndex: undefined,
-          openModal: true,
-        });
-  };
-
-  deleteGame = (id) => {
-    const games = { ...this.state.games };
-    const gamesValues = Object.values(games);
-    this.setState({ games: gamesValues.filter((el) => el.id !== id) });
-  };
+  add(game, i) {
+    this.props.addGame(game, i);
+  }
 
   render() {
     return (
       <>
-        {Object.keys(this.state.games).map((key) => {
+        {this.props.games.map((game, i) => {
           return (
-            <Grid key={key} item xs={12} md={6} lg={4} align="center">
-              <GameCard
-                details={this.state.games[key]}
-                onDelete={this.deleteGame}
-                onEdit={this.editIndex.bind(null, key)}
-              />
+            <Grid key={i} item xs={12} md={6} lg={4} align="center">
+              {!game.editing ? (
+                <GameCard
+                  details={game}
+                  onDelete={() => this.remove(i)}
+                  onEdit={() => this.edit(i, game)}
+                />
+              ) : (
+                <AdminGameCard gameEdit={game} index={i} />
+              )}
             </Grid>
           );
         })}
         <Grid item xs={12} md={6} lg={4} align="center">
-          <IconButton onClick={this.editIndex}>
+          <IconButton onClick={() => this.add(this.props.newGame)}>
             <MyAddIcon />
           </IconButton>
         </Grid>
-
-        {this.state.openModal ? (
-          <AdminGameCard
-            //Add new game to list
-            addGame={this.addGame}
-            //Update game with current index
-            updateGame={this.updateGame}
-            //Game card data
-            gameEdit={this.state.gameEdit}
-            //Index of pressed game card
-            index={this.state.gameEditIndex}
-            //Open modal
-            modal={this.closeModal}
-          />
-        ) : null}
       </>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  games: state.games.games,
+  newGame: state.games.newGame,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeGame: (i) => dispatch(removeGame(i)),
+    editGame: (i, game) => dispatch(editGame(i, game)),
+    addGame: (game, i) => dispatch(addGame(game, i)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Games);

@@ -1,6 +1,6 @@
+import React from 'react';
 import { Toolbar, IconButton } from '@mui/material';
 import { HeaderAppBar, LogoTyp } from './StyledComponents';
-import React from 'react';
 
 const Header = () => {
   return (
