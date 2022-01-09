@@ -1,30 +1,30 @@
 import { REMOVE_GAME, ADD_GAME, EDIT_GAME, UPDATE_GAME } from '../constants/action-types';
 
-export const removeGame = (index) => {
+export const removeGame = (id) => {
   return {
     type: REMOVE_GAME,
-    payload: index,
+    payload: id,
   };
 };
 
-export const addGame = (game) => {
+export const addGame = (game, id) => {
   return {
     type: ADD_GAME,
+    game,
+    id,
+  };
+};
+
+export const editGame = (game) => {
+  return {
+    type: EDIT_GAME,
     payload: game,
   };
 };
 
-export const editGame = (index) => {
-  return {
-    type: EDIT_GAME,
-    payload: index,
-  };
-};
-
-export const updateGame = (game, index) => {
+export const updateGame = (game) => {
   return {
     type: UPDATE_GAME,
-    game,
-    index,
+    payload: game,
   };
 };

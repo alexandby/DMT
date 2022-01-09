@@ -5,14 +5,13 @@ import { gamesData } from '../../db/games.js';
 const initialState = {
   games: gamesData,
   newGame: {
-    id: 'game0',
     name: '',
     logo: '',
     rank: '',
     cardMap: '',
     signPlayers: 0,
     maxPlayers: 0,
-    editing: 'true',
+    editing: true,
   },
 };
 
@@ -21,25 +20,25 @@ export const gamesReducer = (state = initialState, action) => {
     case REMOVE_GAME:
       return {
         ...state,
-        games: state.games.filter((g, i) => i !== action.payload),
+        games: state.games.filter((game) => game.id !== action.payload),
       };
     case ADD_GAME:
       return {
         ...state,
-        games: [...state.games, action.payload],
+        games: [...state.games, { id: action.id, ...state.newGame }],
       };
     case EDIT_GAME:
       return {
         ...state,
-        games: state.games.map((game, i) =>
-          i === action.payload ? { ...game, editing: true } : { ...game, editing: false },
+        games: state.games.map((game) =>
+          game.id === action.payload ? { ...game, editing: true } : { ...game, editing: false },
         ),
       };
     case UPDATE_GAME:
       return {
         ...state,
-        games: state.games.map((game, i) =>
-          i === action.index ? { ...(game = action.game), editing: false } : game,
+        games: state.games.map((game) =>
+          game.id === action.payload.id ? { ...(game = action.payload), editing: false } : game,
         ),
       };
     default:

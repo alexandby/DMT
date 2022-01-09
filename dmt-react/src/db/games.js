@@ -1,6 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const gamesData = [
   {
-    id: 'game1',
+    id: uuidv4(),
     name: 'DOTA 2 High ranked MMR (18+)',
     logo: '/img/games-img/dota2card.jpg',
     rank: '/img/players-img/amateur.png',
@@ -9,7 +11,7 @@ export const gamesData = [
     maxPlayers: 10,
   },
   {
-    id: 'game2',
+    id: uuidv4(),
     name: 'CS:GO World Cup I',
     logo: '/img/games-img/csgocard.jpg',
     rank: '/img/players-img/novice.png',
@@ -18,7 +20,7 @@ export const gamesData = [
     maxPlayers: 10,
   },
   {
-    id: 'game3',
+    id: uuidv4(),
     name: 'WoT Last Fight Tournament',
     logo: '/img/games-img/wotcard.jpg',
     rank: '/img/players-img/expert.png',
@@ -27,7 +29,7 @@ export const gamesData = [
     maxPlayers: 30,
   },
   {
-    id: 'game4',
+    id: uuidv4(),
     name: 'LOL 1x1 Fight (Fav Champs)',
     logo: '/img/games-img/lolcard.jpg',
     rank: '/img/players-img/novice.png',
@@ -36,7 +38,7 @@ export const gamesData = [
     maxPlayers: 10,
   },
   {
-    id: 'game5',
+    id: uuidv4(),
     name: 'PUBG CIS Battle Royal (21+) ',
     logo: '/img/games-img/pubgcard.jpg',
     rank: '/img/players-img/expert.png',
@@ -45,7 +47,7 @@ export const gamesData = [
     maxPlayers: 25,
   },
   {
-    id: 'game6',
+    id: uuidv4(),
     name: 'FarCry 6 DeathMatch Tournament',
     logo: '/img/games-img/farcrycard.jpg',
     rank: '/img/players-img/expert.png',

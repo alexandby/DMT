@@ -64,10 +64,10 @@ class GameCard extends Component {
           <IconButton aria-label="playCurGame" onClick={() => console.log('Joined!')}>
             <PlayArrowIcon />
           </IconButton>
-          <IconButton aria-label="editCurGame" onClick={() => this.props.onEdit(id)}>
+          <IconButton aria-label="editCurGame" onClick={() => this.props.onEdit({ id })}>
             <EditIcon />
           </IconButton>
-          <IconButton aria-label="delGameCard" onClick={() => this.props.onDelete(id)}>
+          <IconButton aria-label="delGameCard" onClick={() => this.props.onDelete({ id })}>
             <DeleteIcon />
           </IconButton>
         </GameCardActions>

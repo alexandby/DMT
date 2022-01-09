@@ -18,6 +18,12 @@ export const PlayersTyp = styled(Typography)({
   color: 'darkgray',
 });
 
+export const ValidationTyp = styled(Typography)({
+  textAlign: 'left',
+  fontFamily: 'Montserrat',
+  color: 'red',
+});
+
 export const AdmInput = styled(Input)({
   width: '345px',
   color: 'white',

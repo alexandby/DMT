@@ -1,30 +1,27 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers/rootReducer';
 
-function saveToLocalStorage(state) {
-  try {
-    const gamesDataLS = JSON.stringify(state);
-    localStorage.setItem('gamesData', gamesDataLS);
-  } catch (e) {
-    console.warn(e);
+const localStorageMiddleware = ({ getState }) => {
+  return (next) => (action) => {
+    const result = next(action);
+    localStorage.setItem('gamesData', JSON.stringify(getState()));
+    return result;
+  };
+};
+
+const reHydrateStore = () => {
+  if (localStorage.getItem('gamesData') !== null) {
+    return JSON.parse(localStorage.getItem('gamesData'));
   }
-}
-function loadFromLocalStorage() {
-  try {
-    const gamesDataLS = localStorage.getItem('gamesData');
-    if (gamesDataLS === null) return undefined;
-    return JSON.parse(gamesDataLS);
-  } catch (e) {
-    console.warn(e);
-    return undefined;
-  }
-}
+};
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducer,
-  loadFromLocalStorage(),
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  reHydrateStore(),
+  composeEnhancers(applyMiddleware(thunkMiddleware, localStorageMiddleware)),
 );
-store.subscribe(() => saveToLocalStorage(store.getState()));
 
 export default store;
